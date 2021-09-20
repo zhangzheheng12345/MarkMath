@@ -27,7 +27,7 @@ func main() {
         Writeln("</head>")
         Writeln("<body>")
         Writeln("<div id=\"main\">")
-        ParseMath(strings.Split(input,""),0).rend()
+        ParseLine(strings.Split(input,"")).rend()
         Writeln("</div>")
         Writeln("</body>")
         Writeln("</html>")
