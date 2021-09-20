@@ -17,6 +17,7 @@ func main() {
         Writeln("div{")
         Writeln("   display:flex;")
         Writeln("   justify-content:flex-start;")
+        Writeln("   align-items:center;")
         Writeln("   padding:3px;")
         Writeln("}")
         Writeln("div#main{")
@@ -27,7 +28,7 @@ func main() {
         Writeln("<body>")
         Writeln("<div id=\"main\">")
         ParseMath(strings.Split(input,""),0).rend()
-        Writeln("\n</div>")
+        Writeln("</div>")
         Writeln("</body>")
         Writeln("</html>")
     }

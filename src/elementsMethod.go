@@ -12,6 +12,25 @@ func Writeln(str string) {
     fmt.Println(str)
 }
 
+func NewLine(li []Element) Line {
+    return Line{li}
+}
+
+func (line Line) rend() {
+    for _,element := line.elements {
+        element.rend()
+    }
+    Write("\n")
+}
+
+func NewText(str string) Text {
+    return Text{str}
+}
+
+func (text Text) rend() {
+    Write(text.value)
+}
+
 func NewNum(str string,next Element) Num {
     return Num{str,next}
 }
@@ -50,8 +69,12 @@ func NewMulti(next Element) Multi {
 }
 
 func (multi Multi) rend() {
-    /* Use svg later */
-    Write("*")
+    Writeln("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\">")
+    Writeln("<g transform=\"translate(2,5)\">")
+    Writeln("<rect transform=\"rotate(45,5,1)\" width=\"10\" height=\"2\"/>")
+    Writeln("<rect transform=\"rotate(135,5,1)\" width=\"10\" height=\"2\"/>")
+    Writeln("</g>")
+    Writeln("</svg>")
     if multi.next != nil {
         multi.next.rend()
     }
@@ -62,8 +85,11 @@ func NewDivide(next Element) Divide {
 }
 
 func (divide Divide) rend() {
-    /* Use svg later */
-    Write("/")
+    Writeln("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\">")
+    Writeln("<circle cx=\"7\" cy=\"3\" r=\"1\"/>")
+    Writeln("<rect transform=\"translate(2,6)\" width=\"10\" height=\"2\"/>")
+    Writeln("<circle cx=\"7\" cy=\"11\" r=\"1\"/>")
+    Writeln("</svg>")
     if divide.next != nil {
         divide.next.rend()
     }
