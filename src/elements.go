@@ -8,6 +8,10 @@ type Element interface {
     rend()
 }
 
+type Whole struct {
+    elements []Element
+}
+
 type Line struct {
     elements []Element
 }
@@ -17,6 +21,11 @@ type Text struct {
 }
 
 type Num struct {
+    value string
+    next Element
+}
+
+type Alpha struct {
     value string
     next Element
 }

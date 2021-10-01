@@ -6,15 +6,23 @@ import (
     "elements"
 )
 
-func ParseLine(str []string) Element{
+func ParseWhole(strs []string) Element {
+    var result []elements.Element
+    for _,str := range strs {
+        result = append(result,ParseLine(strings.Split(str,"")))b
+    }
+    return elements.NewWhole(result)
+}
+
+func ParseLine(str []string) Element {
     var index int = 0
-    var result []Element
+    var result []elements.Element
     var begin int = 0
     for ;index < len(str);index++ {
         if str[index] == "$" && len(str) - index >= 2{
-            /* no space between &[ ] */
+            /* no space between $[ ] */
             if str[index + 1] == "[" { 
-                result = append(result,NewText(strings.Join(str[begin:index],"")))
+                result = append(result,elements.NewText(strings.Join(str[begin:index],"")))
                 var count int = 1
                 index += 2
                 begin = index
@@ -33,45 +41,41 @@ func ParseLine(str []string) Element{
     if index - begin > 1{
         result = append(result,NewText(strings.Join(str[begin:index],"")))
     }
-    return NewLine(result)
+    return elements.NewLine(result)
 }
 
 func IsSingleNum(str string) bool {
     return len(str) == 1 && []byte(str)[0] >= 48 && []byte(str)[0] <= 57
 }
 
-func ParseMath(str []string,index int) Element{
-    if len(str) - index == 1 {
+func IsSingleAlpha(str string) bool {
+    return len(str) == 1 && []byte(str)[0] >= 65 && []byte(str)[0] <= 122
+}
+
+func ParseMath(str []string,index int) Element {
+    if index >= len(str) {
+        return nil
+    } else if index < len(str) {
         if str[index] == "+" {
-            return NewPlus(nil)
+            return elements.NewPlus(ParseMath(str,index + 1))
         } else if str[index] == "-" {
-            return NewMinus(nil)
+            return elements.NewMinus(ParseMath(str,index + 1))
         } else if str[index] == "*" {
-            return NewMulti(nil)
+            return elements.NewMulti(ParseMath(str,index + 1))
         } else if str[index] == "/" {
-            return NewDivide(nil)
+            return elements.NewDivide(ParseMath(str,index + 1))
         } else if str[index] == "=" {
-            return NewEqual(nil)
-        } else if IsSingleNum(str[index]) {
-            return NewNum(str[index],nil)
-        }
-    } else {
-        if str[index] == "+" {
-            return NewPlus(ParseMath(str,index + 1))
-        } else if str[index] == "-" {
-            return NewMinus(ParseMath(str,index + 1))
-        } else if str[index] == "*" {
-            return NewMulti(ParseMath(str,index + 1))
-        } else if str[index] == "/" {
-            return NewDivide(ParseMath(str,index + 1))
-        } else if str[index] == "=" {
-            return NewEqual(ParseMath(str,index + 1))
+            return elements.NewEqual(ParseMath(str,index + 1))
         } else if IsSingleNum(str[index]) {
             endIndex := index
-            for IsSingleNum(str[endIndex]) && endIndex < len(str) {
+            for endIndex < len(str) && IsSingleNum(str[endIndex]) {
                 endIndex++
             }
-            return NewNum(strings.Join(str[index:endIndex],""),ParseMath(str,endIndex))
+            return elements.NewNum(strings.Join(str[index:endIndex],""),ParseMath(str,endIndex))
+        } else if IsSingleAlpha(str[index]) {
+            return elements.NewAlpha(str[index],ParseMath(str,index+1))
+        } else {
+            return ParseMath(str,index + 1)
         }
     }
     return nil

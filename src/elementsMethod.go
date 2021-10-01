@@ -12,15 +12,26 @@ func Writeln(str string) {
     fmt.Println(str)
 }
 
+func NewWhole(li []Element) Whole {
+    return Whole{li}
+}
+
+func (whole Whole) rend() {
+    for _,element := range whole.elements {
+        element.rend()
+    }
+}
+
 func NewLine(li []Element) Line {
     return Line{li}
 }
 
 func (line Line) rend() {
-    for _,element := line.elements {
+    Writeln("<div>")
+    for _,element := range line.elements {
         element.rend()
     }
-    Write("\n")
+    Writeln("\n</div>")
 }
 
 func NewText(str string) Text {
@@ -33,6 +44,15 @@ func (text Text) rend() {
 
 func NewNum(str string,next Element) Num {
     return Num{str,next}
+}
+
+func NewAlpha(str string,next Element) Alpha {
+    return Alpha{str,next}
+}
+
+func (alpha Alpha) rend() {
+    Write(alpha.value)
+    alpha.next.rend()
 }
 
 func (num Num) rend() {
@@ -70,9 +90,9 @@ func NewMulti(next Element) Multi {
 
 func (multi Multi) rend() {
     Writeln("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\">")
-    Writeln("<g transform=\"translate(2,5)\">")
-    Writeln("<rect transform=\"rotate(45,5,1)\" width=\"10\" height=\"2\"/>")
-    Writeln("<rect transform=\"rotate(135,5,1)\" width=\"10\" height=\"2\"/>")
+    Writeln("<g transform=\"translate(3,6)\">")
+    Writeln("<rect transform=\"rotate(45,4,1)\" width=\"8\" height=\"2\"/>")
+    Writeln("<rect transform=\"rotate(135,4,1)\" width=\"8\" height=\"2\"/>")
     Writeln("</g>")
     Writeln("</svg>")
     if multi.next != nil {
