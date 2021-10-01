@@ -49,3 +49,7 @@ type Divide struct {
 type Equal struct {
     next Element
 }
+
+type PlusMinus struct {
+    next Element
+}

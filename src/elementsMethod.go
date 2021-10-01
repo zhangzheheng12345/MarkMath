@@ -125,3 +125,18 @@ func (equal Equal) rend() {
         equal.next.rend()
     }
 }
+
+func NewPlusMinus(next Element) PlusMinus {
+    return PlusMinus{next}
+}
+
+func (plusMinus PlusMinus) rend() {
+    Writeln("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\">")
+    Writeln("<rect transform=\"translate(6,2)\" width=\"2\" height=\"8\"/>")
+    Writeln("<rect transform=\"translate(2,6)\" width=\"10\" height=\"2\"/>")
+    Writeln("<rect transform=\"translate(2,11)\" width=\"10\" height=\"2\"/>")
+    Writeln("</svg>")
+    if plusMinus.next != nil {
+        plusMinus.next.rend()
+    }
+}

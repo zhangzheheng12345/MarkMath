@@ -53,11 +53,13 @@ func IsSingleAlpha(str string) bool {
 }
 
 func ParseMath(str []string,index int) Element {
-    if index >= len(str) {
-        return nil
-    } else if index < len(str) {
+    if index < len(str) {
         if str[index] == "+" {
-            return elements.NewPlus(ParseMath(str,index + 1))
+            if index + 1 < len(str) && str[index + 1] == "-" {
+                return elements.NewPlusMinus(ParseMath(str,index + 2))
+            } else {
+                return elements.NewPlus(ParseMath(str,index + 1))
+            }
         } else if str[index] == "-" {
             return elements.NewMinus(ParseMath(str,index + 1))
         } else if str[index] == "*" {
