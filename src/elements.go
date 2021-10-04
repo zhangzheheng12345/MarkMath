@@ -50,6 +50,26 @@ type Equal struct {
     next Element
 }
 
+type Bigger struct {
+    next Element
+}
+
+type Smaller struct {
+    next Element
+}
+
+type FrontBrace struct {
+    next Element
+}
+
+type BackBrace struct {
+    next Element
+}
+
 type PlusMinus struct {
+    next Element
+}
+
+type Fraction struct {
     next Element
 }

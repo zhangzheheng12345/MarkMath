@@ -126,6 +126,50 @@ func (equal Equal) rend() {
     }
 }
 
+func NewBigger(next Element) Bigger {
+    return Bigger{next}
+}
+
+func (bigger Bigger) rend() {
+    Write(">")
+    if bigger.next != nil {
+        bigger.next.rend()
+    }
+}
+
+func NewSmaller(next Element) Smaller {
+    return Smaller{next}
+}
+
+func (smaller Smaller) rend() {
+    Write("<")
+    if smaller.next != nil {
+        smaller.next.rend()
+    }
+}
+
+func NewFrontBrace(next Element) FrontBrace {
+    return FrontBrace{next}
+}
+
+func (fBrace FrontBrace) rend() {
+    Write("(")
+    if fBrace.next != nil {
+        fBrace.next.rend()
+    }
+}
+
+func NewBackBrace(next Element) BackBrace {
+    return BackBrace{next}
+}
+
+func (bBrace BackBrace) rend() {
+    Write(")")
+    if bBrace.next != nil {
+        bBrace.next.rend()
+    }
+}
+
 func NewPlusMinus(next Element) PlusMinus {
     return PlusMinus{next}
 }

@@ -68,6 +68,14 @@ func ParseMath(str []string,index int) Element {
             return elements.NewDivide(ParseMath(str,index + 1))
         } else if str[index] == "=" {
             return elements.NewEqual(ParseMath(str,index + 1))
+        } else if str[index] == ">" {
+            return elements.NewBigger(ParseMath(str,index + 1))
+        } else if str[index] == "<" {
+            return elements.NewSmaller(ParseMath(str,index + 1))
+        } else if str[index] == "(" {
+            return elements.NewFrontBrace(ParseMath(str,index + 1))
+        } else if str[index] == ")" {
+            return elements.NewBackBrace(ParseMath(str,index + 1))
         } else if IsSingleNum(str[index]) {
             endIndex := index
             for endIndex < len(str) && IsSingleNum(str[endIndex]) {
