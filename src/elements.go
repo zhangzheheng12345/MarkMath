@@ -9,6 +9,7 @@ type Element interface {
 }
 
 type Whole struct {
+    template string
     elements []Element
 }
 
@@ -71,5 +72,7 @@ type PlusMinus struct {
 }
 
 type Fraction struct {
+    top Element
+    bottom Element
     next Element
 }

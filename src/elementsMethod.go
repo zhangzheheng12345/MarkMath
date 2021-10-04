@@ -2,6 +2,7 @@ package elements
 
 import (
     "fmt"
+    "strings"
 )
 
 func Write(str string) {
@@ -12,14 +13,17 @@ func Writeln(str string) {
     fmt.Println(str)
 }
 
-func NewWhole(li []Element) Whole {
-    return Whole{li}
+func NewWhole(str string,li []Element) Whole {
+    return Whole{str,li}
 }
 
 func (whole Whole) rend() {
+    li := strings.Split(whole.template,"##########")
+    Writeln(li[0])
     for _,element := range whole.elements {
         element.rend()
     }
+    Writeln(li[1])
 }
 
 func NewLine(li []Element) Line {
@@ -182,5 +186,25 @@ func (plusMinus PlusMinus) rend() {
     Writeln("</svg>")
     if plusMinus.next != nil {
         plusMinus.next.rend()
+    }
+}
+
+func NewFraction(top Element,bottom Element,next Element) Fraction {
+    return Fraction{top,bottom,next}
+}
+
+func (fraction Fraction) rend() {
+    Writeln("<div class=\"fraction\"")
+    Writeln("<div>")
+    fraction.top.rend()
+    Writeln("</div>")
+    Writeln("<div class=\"fractionLine\">")
+    Writeln("</div>")
+    Writeln("<div>")
+    fraction.bottom.rend()
+    Writeln("</div>")
+    Writeln("</div>")
+    if fraction.next != nil {
+        fraction.next.rend()
     }
 }

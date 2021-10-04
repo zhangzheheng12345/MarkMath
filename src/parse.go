@@ -6,12 +6,12 @@ import (
     "elements"
 )
 
-func ParseWhole(strs []string) Element {
+func ParseWhole(template string, strs []string) Element {
     var result []elements.Element
     for _,str := range strs {
-        result = append(result,ParseLine(strings.Split(str,"")))b
+        result = append(result,ParseLine(strings.Split(str,"")))
     }
-    return elements.NewWhole(result)
+    return elements.NewWhole(template,result)
 }
 
 func ParseLine(str []string) Element {
@@ -65,7 +65,37 @@ func ParseMath(str []string,index int) Element {
         } else if str[index] == "*" {
             return elements.NewMulti(ParseMath(str,index + 1))
         } else if str[index] == "/" {
-            return elements.NewDivide(ParseMath(str,index + 1))
+            if index + 1 < len(str) && str[index + 1] == "[" {
+                index += 2
+                count := 0
+                result := []string{}
+                for index < len(str) && !(count == 0 && str[index] == ","){
+                    result = append(result,str[index])
+                    if str[index] == "[" {
+                        count++
+                    } else if str[index] == "]" {
+                        count--
+                    }
+                    index++
+                }
+                top := ParseMath(result,0)
+                index++
+                count = 0
+                result = []string{}
+                for index < len(str) && !(count == 0 && str[index] == "]"){
+                    result = append(result,str[index])
+                    if str[index] == "[" {
+                        count++
+                    } else if str[index] == "]" {
+                        count--
+                    }
+                    index++
+                }
+                bottom := ParseMath(result,0)
+                return elements.NewFraction(top,bottom,ParseMath(str,index + 1))
+            } else {
+                return elements.NewDivide(ParseMath(str,index + 1))
+            }
         } else if str[index] == "=" {
             return elements.NewEqual(ParseMath(str,index + 1))
         } else if str[index] == ">" {
