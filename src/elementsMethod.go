@@ -179,10 +179,10 @@ func NewPlusMinus(next Element) PlusMinus {
 }
 
 func (plusMinus PlusMinus) rend() {
-    Writeln("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\">")
-    Writeln("<rect transform=\"translate(6,2)\" width=\"2\" height=\"8\"/>")
-    Writeln("<rect transform=\"translate(2,6)\" width=\"10\" height=\"2\"/>")
-    Writeln("<rect transform=\"translate(2,11)\" width=\"10\" height=\"2\"/>")
+    Writeln("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"13\" height=\"13\">")
+    Writeln("<rect transform=\"translate(6,3)\" width=\"1\" height=\"7\"/>")
+    Writeln("<rect transform=\"translate(3,6)\" width=\"7\" height=\"1\"/>")
+    Writeln("<rect transform=\"translate(3,11)\" width=\"7\" height=\"1\"/>")
     Writeln("</svg>")
     if plusMinus.next != nil {
         plusMinus.next.rend()
@@ -194,7 +194,7 @@ func NewFraction(top Element,bottom Element,next Element) Fraction {
 }
 
 func (fraction Fraction) rend() {
-    Writeln("<div class=\"fraction\"")
+    Writeln("<div class=\"fraction\">")
     Writeln("<div>")
     fraction.top.rend()
     Writeln("</div>")

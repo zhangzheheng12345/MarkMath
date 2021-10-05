@@ -58,7 +58,7 @@ func ParseMath(str []string,index int) Element {
             if index + 1 < len(str) && str[index + 1] == "-" {
                 return elements.NewPlusMinus(ParseMath(str,index + 2))
             } else {
-                return elements.NewPlus(ParseMath(str,index + 1))
+                return elements.NewPlus(ParseMath(str,index + 2))
             }
         } else if str[index] == "-" {
             return elements.NewMinus(ParseMath(str,index + 1))
