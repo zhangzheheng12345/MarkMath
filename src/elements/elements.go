@@ -76,3 +76,9 @@ type Fraction struct {
     bottom Element
     next Element
 }
+
+type Root struct {
+    rootNum Element
+    rootBottom Element
+    next Element
+}
