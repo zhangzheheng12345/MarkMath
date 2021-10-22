@@ -1,9 +1,8 @@
 package main
 
 import (
-    "fmt"
-    "strings"
-    "elements"
+	"elements"
+	"strings"
 )
 
 func ParseWhole(template string, strs []string) elements.Element {
@@ -45,11 +44,11 @@ func ParseLine(str []string) elements.Element {
 }
 
 func IsSingleNum(str string) bool {
-    return len(str) == 1 && []byte(str)[0] >= 48 && []byte(str)[0] <= 57
+	return len(str) == 1 && []byte(str)[0] >= 48 && []byte(str)[0] <= 57
 }
 
 func IsSingleAlpha(str string) bool {
-    return len(str) == 1 && []byte(str)[0] >= 65 && []byte(str)[0] <= 122
+	return len(str) == 1 && []byte(str)[0] >= 65 && []byte(str)[0] <= 122
 }
 
 func ParseMath(str []string,index int) elements.Element {
