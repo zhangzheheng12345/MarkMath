@@ -13,7 +13,7 @@ func main() {
       fmt.Println(err)
       return
     }
-    if len(os.Arg) > 1 {
+    if len(os.Args) > 1 {
       wholeFile, err := os.ReadFile(os.Args[1])
       if err != nil {
             fmt.Println(err)
