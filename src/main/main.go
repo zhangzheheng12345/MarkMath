@@ -14,12 +14,11 @@ func main() {
       return
     }
     if len(os.Arg) > 1 {
-      wholeFile, err := string(os.ReadFile(os.Arg[1]))
+      wholeFile, err := os.ReadFile(os.Args[1])
       if err != nil {
             fmt.Println(err)
       } else {
-            /* for windows, \r\n */
-            ParseWhole(template,strings.Split(wholeFile,"\r\n")).rend()
+            Rend(ParseWhole(string(template),strings.Split(string(wholeFile),"\n")))
       }
       fmt.Scanln(&wholeFile)
     } else {
@@ -31,7 +30,7 @@ func main() {
          whole = append(whole,input)
       }
       if input == "\rend" {
-         ParseWhole(template,li).rend()
+         Rend(ParseWhole(string(template),whole))
          fmt.Scanln(&input) /* wait enter */
       }
     }

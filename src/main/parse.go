@@ -6,7 +6,7 @@ import (
     "elements"
 )
 
-func ParseWhole(template string, strs []string) Element {
+func ParseWhole(template string, strs []string) elements.Element {
     var result []elements.Element
     for _,str := range strs {
         result = append(result,ParseLine(strings.Split(str,"")))
@@ -14,7 +14,7 @@ func ParseWhole(template string, strs []string) Element {
     return elements.NewWhole(template,result)
 }
 
-func ParseLine(str []string) Element {
+func ParseLine(str []string) elements.Element {
     var index int = 0
     var result []elements.Element
     var begin int = 0
@@ -39,7 +39,7 @@ func ParseLine(str []string) Element {
         }
     }
     if index - begin > 1{
-        result = append(result,NewText(strings.Join(str[begin:index],"")))
+        result = append(result,elements.NewText(strings.Join(str[begin:index],"")))
     }
     return elements.NewLine(result)
 }
@@ -52,7 +52,7 @@ func IsSingleAlpha(str string) bool {
     return len(str) == 1 && []byte(str)[0] >= 65 && []byte(str)[0] <= 122
 }
 
-func ParseMath(str []string,index int) Element {
+func ParseMath(str []string,index int) elements.Element {
     if index < len(str) {
         if str[index] == "+" {
             if index + 1 < len(str) && str[index + 1] == "-" {

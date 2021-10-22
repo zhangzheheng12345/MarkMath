@@ -13,6 +13,10 @@ func Writeln(str string) {
     fmt.Println(str)
 }
 
+func Rend(x Element) {
+    x.rend()
+}
+
 func NewWhole(str string,li []Element) Whole {
     return Whole{str,li}
 }
