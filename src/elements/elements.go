@@ -68,13 +68,13 @@ type PlusMinus struct {
 }
 
 type Fraction struct {
-    top Element
-    bottom Element
-    next Element
+	top    Element
+	bottom Element
+	next   Element
 }
 
 type Root struct {
-    rootNum Element
-    rootBottom Element
-    next Element
+	rootNum    Element
+	rootBottom Element
+	next       Element
 }
