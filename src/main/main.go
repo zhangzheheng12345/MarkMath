@@ -8,30 +8,28 @@ import (
 )
 
 func main() {
-	template, err := os.ReadFile(".\template.html")
+	template, err := os.ReadFile("template.html")
 	if err != nil {
 		fmt.Println(err)
-		return
-	}
-	if len(os.Args) > 1 {
+	} else if len(os.Args) > 1 {
 		wholeFile, err := os.ReadFile(os.Args[1])
 		if err != nil {
 			fmt.Println(err)
 		} else {
 			elements.Rend(ParseWhole(string(template), strings.Split(string(wholeFile), "\n")))
 		}
-		fmt.Scanln(&wholeFile)
 	} else {
-		var input string
+		var input string = ""
 		var whole []string
 		for input != "\\quit" && input != "\\rend" {
 			fmt.Print("> ")
 			fmt.Scanln(&input)
 			whole = append(whole, input)
 		}
-		if input == "\rend" {
+		if input == "\\rend" {
 			elements.Rend(ParseWhole(string(template), whole))
-			fmt.Scanln(&input) /* wait enter */
 		}
 	}
+	a := ""
+	fmt.Scanln(&a)
 }
