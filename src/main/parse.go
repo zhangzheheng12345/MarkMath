@@ -107,7 +107,7 @@ func ParseMath(str []string,index int) elements.Element {
             return elements.NewBackBrace(ParseMath(str,index + 1))
         } else if IsSingleNum(str[index]) {
             endIndex := index
-            for endIndex < len(str) && IsSingleNum(str[endIndex]) {
+            for str[endIndex] == "." || (endIndex < len(str) && IsSingleNum(str[endIndex])){
                 endIndex++
             }
             return elements.NewNum(strings.Join(str[index:endIndex],""),ParseMath(str,endIndex))

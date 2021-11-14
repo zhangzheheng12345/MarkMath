@@ -10,8 +10,8 @@ If you don't tell MarkMath which file you want to compile, it will start default
 * / => divide symbol 
 * \* => multiply symbol 
 * /[..., ...] => a/b 
+* +- => (You know what I mean) 
 ### Will support 
-* float nunber 
 * root 
 * triangle functions 
 * power 
