@@ -212,3 +212,31 @@ func (fraction Fraction) rend() {
 		fraction.next.rend()
 	}
 }
+
+func NewRoot(top Element, bottom Element, next Element) Fraction {
+	return Root{top, bottom, next}
+}
+
+func (root Root) rend() {
+	Writeln("<div class=\"root\">")
+	Writeln("<div class=\"rootFront\">")
+	Writeln("<div>")
+	root.rootNum.rend()
+	Writeln("</div>")
+	Writeln("<div class=\"rootBottom\">")
+	Writeln("</div>")
+	Writeln("</div>")
+	Writeln("<div class=\"rootMid\">")
+	Writeln("</div>")
+	Writeln("<div class=\"rootBack\">")
+	Writeln("<div class=\"rootLine\">")
+	Writeln("</div>")
+	Writeln("<div>")
+	root.rootBottom.rend()
+	Writeln("</div>")
+	Writeln("</div>")
+	Writeln("</div>")
+	if root.next != nil {
+		root.next.rend()
+	}
+}
