@@ -95,6 +95,34 @@ func ParseMath(str []string,index int) elements.Element {
             } else {
                 return elements.NewDivide(ParseMath(str,index + 1))
             }
+        } else if str[index] == "\\" {
+            index += 2
+            count := 0
+            result := []string{}
+            for index < len(str) && !(count == 0 && str[index] == ","){
+                result = append(result,str[index])
+                if str[index] == "[" {
+                    count++
+                } else if str[index] == "]" {
+                    count--
+                }
+                index++
+            }
+            top := ParseMath(result,0)
+            index++
+            count = 0
+            result = []string{}
+            for index < len(str) && !(count == 0 && str[index] == "]"){
+                result = append(result,str[index])
+                if str[index] == "[" {
+                    count++
+                } else if str[index] == "]" {
+                    count--
+                }
+                index++
+            }
+            bottom := ParseMath(result,0)
+            return elements.NewRoot(top,bottom,ParseMath(str,index + 1))
         } else if str[index] == "=" {
             return elements.NewEqual(ParseMath(str,index + 1))
         } else if str[index] == ">" {

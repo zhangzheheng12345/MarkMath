@@ -12,7 +12,8 @@ If you don't tell MarkMath which file you want to compile, it will start default
 * /[..., ...] => a/b 
 * +- => (You know what I mean) 
 ### Will support 
-* root 
+* root ( need debugging )
 * triangle functions 
 * power 
 * below mark 
+* better error & warning report

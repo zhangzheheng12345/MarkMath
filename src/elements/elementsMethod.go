@@ -223,8 +223,7 @@ func (root Root) rend() {
 	Writeln("<div>")
 	root.rootNum.rend()
 	Writeln("</div>")
-	Writeln("<div class=\"rootBottom\">")
-	Writeln("</div>")
+	/* SVG */
 	Writeln("</div>")
 	Writeln("<div class=\"rootMid\">")
 	Writeln("</div>")
