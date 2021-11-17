@@ -1,5 +1,5 @@
 # MarkMath 
-![](icon/MarkMathIcon.jpeg)
+![](icon/MarkMathIcon.jpeg) 
 This project wants to solve the problem of rendering math expressions in html. 
 In html, you can use Mathjax to render math expressions but it's too heavy. MarkMath is a lighter markup language to write math expressions. 
 MarkMath processor compiles the MarkMath texts into html. The compiled html files don't need Mathjax. They use svg to render so they're more independent. 
