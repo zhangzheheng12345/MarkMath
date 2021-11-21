@@ -141,6 +141,19 @@ func ParseMath(str []string,index int) elements.Element {
             return elements.NewNum(strings.Join(str[index:endIndex],""),ParseMath(str,endIndex))
         } else if IsSingleAlpha(str[index]) {
             return elements.NewAlpha(str[index],ParseMath(str,index+1))
+        } else if str[index] == ";" {
+            index++
+            if index < len(str) {
+                if str[index] == "a" {
+                    return elements.NewAlpha("α",ParseMath(str,index+1))
+                } else if str[index] == "b" {
+                    return elements.NewAlpha("β",ParseMath(str,index+1))
+                } else if str[index] == "d" {
+                    return elements.NewAlpha("Δ",ParseMath(str,index+1))
+                } else if str[index] == "l" {
+                    return elements.NewAlpha("λ",ParseMath(str,index+1))
+                }
+            }
         } else {
             return ParseMath(str,index + 1)
         }

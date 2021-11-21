@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"path/filepath"
 )
 
 func main() {
@@ -12,7 +13,7 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	} else if len(os.Args) > 1 {
-		wholeFile, err := os.ReadFile(os.Args[1])
+		wholeFile, err := os.ReadFile(filepath.Abs(os.Args[1]))
 		if err != nil {
 			fmt.Println(err)
 		} else {
