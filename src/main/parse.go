@@ -152,6 +152,12 @@ func ParseMath(str []string,index int) elements.Element {
                     return elements.NewAlpha("Δ",ParseMath(str,index+1))
                 } else if str[index] == "l" {
                     return elements.NewAlpha("λ",ParseMath(str,index+1))
+                } else if str[index] == "t" {
+                    return elements.NewAlpha("θ",ParseMath(str,index+1))
+                } else if str[index] == "p" {
+                    return elements.NewAlpha("π",ParseMath(str,index+1))
+                } else if str[index] == "g" {
+                    return elements.NewAlpha("γ",ParseMath(str,index+1))
                 }
             }
         } else {

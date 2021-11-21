@@ -12,6 +12,13 @@ If you don't tell MarkMath which file you want to compile, it will start default
 * \* => multiply symbol 
 * /[..., ...] => a/b 
 * +- => (You know what I mean) 
+* ;a => α
+* ;b => β
+* ;t => θ
+* ;p => π
+* ;g => γ
+* ;l => λ
+* ;d => ΔΑ
 ### Will support 
 * root ( need debugging )
 * triangle functions 
