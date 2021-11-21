@@ -223,7 +223,7 @@ func (root Root) rend() {
 	Writeln("<div>")
 	root.rootNum.rend()
 	Writeln("<svg width=\"4px\" height=\"3px\" xmlns=\"http://www.w3.org/2000/svg\">")
-	Writeln("	<path d=\"M0 2 L2 0 L4 3\" stroke=\"black\"/>"
+	Writeln("	<path d=\"M0 2 L2 0 L4 3\" stroke=\"black\"/>")
 	Writeln("</svg>")
 	Writeln("<div class=\"rootMid\">")
 	Writeln("</div>")
