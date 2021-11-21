@@ -213,7 +213,7 @@ func (fraction Fraction) rend() {
 	}
 }
 
-func NewRoot(top Element, bottom Element, next Element) Fraction {
+func NewRoot(top Element, bottom Element, next Element) Root {
 	return Root{top, bottom, next}
 }
 
