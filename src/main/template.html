@@ -5,8 +5,8 @@
             div {
                 display:flex;
                 align-items:center;
-                margin-left:1px;
-                margin-right:1px;
+                padding-left:1px;
+                padding-right:1px;
             }
             div.fraction {
                 flex-direction:column;
@@ -24,25 +24,44 @@
             }
             div .rootFront {
                 flex-direction:column;
-                align-items:flex-start;
+                align-items:flex-end;
                 justify-content:flex-end;
+                padding:0px;
+                border-right:0px;
             }
             div .rootMid {
+                background-color:black;
                 width:1px;
                 height:100%;
             }
             div .rootLine {
+                background-color:black;
                 width:100%;
                 height:1px;
             }
             div .rootBack {
                 flex-direction:column;
                 align-items:flex-end;
+                padding:0px;
+                border-left:0px;
             }
         </style>
     </head>
     <body>
-        <!-- ten ' # ' are where will be filled. -->
+        <!-- MarkMath Mark : ten ' # ' are where will be filled. -->
         ##########
+        <div class="root">
+        <div class="rootFront">
+        1234
+        </div>
+        <div class="rootMid"></div>
+        <div class="rootBack">
+        <div class="rootLine">
+        </div>
+        <div>
+        1234
+        </div>
+        </div>
+        </div>
     </body>
 </html>
