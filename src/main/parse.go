@@ -160,6 +160,21 @@ func ParseMath(str []string,index int) elements.Element {
                     return elements.NewAlpha("γ",ParseMath(str,index+1))
                 }
             }
+        } else if str[index] == "^" {
+            index += 2
+            count := 0
+            result := []string{}
+            for index < len(str) && !(count == 0) {
+                result = append(result,str[index])
+                if str[index] == "[" {
+                    count++
+                } else if str[index] == "]" {
+                    count--
+                }
+                index++
+            }
+            point := ParseMath(result,0)
+            return elements.NewPower(point,ParseMath(str,index + 1))
         } else {
             return ParseMath(str,index + 1)
         }

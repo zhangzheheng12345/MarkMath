@@ -78,3 +78,8 @@ type Root struct {
 	rootBottom Element
 	next       Element
 }
+
+type Power struct{
+	point Element
+	next  Element
+}

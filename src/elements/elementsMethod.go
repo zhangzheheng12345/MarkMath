@@ -241,3 +241,16 @@ func (root Root) rend() {
 		root.next.rend()
 	}
 }
+
+func NewPower(point Element, next Element) Power {
+	return Power{point, next}
+}
+
+func (power Power) rend() {
+	Writeln("<sup>")
+	power.point.rend()
+	Writeln("</sup>")
+	if power.next != nil {
+		power.next.rend()
+	}
+}
