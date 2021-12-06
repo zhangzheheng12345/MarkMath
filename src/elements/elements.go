@@ -83,3 +83,8 @@ type Power struct{
 	point Element
 	next  Element
 }
+
+type Subscript struct{
+	value Element
+	next  Element
+}

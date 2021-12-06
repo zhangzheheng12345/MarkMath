@@ -254,3 +254,15 @@ func (power Power) rend() {
 		power.next.rend()
 	}
 }
+func NewSubscript(value Element, next Element) Subscript {
+	return Subscript{value, next}
+}
+
+func (subscript Subscript) rend() {
+	Writeln("<sub>")
+	subscript.point.rend()
+	Writeln("</sub>")
+	if subscript.next != nil {
+		subscript.next.rend()
+	}
+}
