@@ -260,7 +260,7 @@ func NewSubscript(value Element, next Element) Subscript {
 
 func (subscript Subscript) rend() {
 	Writeln("<sub>")
-	subscript.point.rend()
+	subscript.value.rend()
 	Writeln("</sub>")
 	if subscript.next != nil {
 		subscript.next.rend()
