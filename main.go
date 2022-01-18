@@ -1,11 +1,12 @@
 package main
 
 import (
-	"elements"
 	"fmt"
 	"os"
-	"strings"
 	"path/filepath"
+	"strings"
+
+	"parser"
 )
 
 func main() {
@@ -18,7 +19,7 @@ func main() {
 		if err != nil {
 			fmt.Println(err)
 		} else {
-			elements.Rend(ParseWhole(string(template), strings.Split(string(wholeFile), "\n")))
+			parser.Rend(parser.ParseWhole(string(template), strings.Split(string(wholeFile), "\n")))
 		}
 	} else {
 		var input string = ""
@@ -29,7 +30,7 @@ func main() {
 			whole = append(whole, input)
 		}
 		if input == "\\rend" {
-			elements.Rend(ParseWhole(string(template), whole))
+			parser.Rend(parser.ParseWhole(string(template), whole))
 		}
 	}
 	a := ""

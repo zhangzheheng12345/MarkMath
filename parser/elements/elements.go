@@ -1,7 +1,7 @@
 package elements
 
 type Element interface {
-	rend()
+	Rend()
 }
 
 type Whole struct {
@@ -79,12 +79,12 @@ type Root struct {
 	next       Element
 }
 
-type Power struct{
+type Power struct {
 	point Element
 	next  Element
 }
 
-type Subscript struct{
+type Subscript struct {
 	value Element
 	next  Element
 }
