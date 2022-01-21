@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -10,27 +11,30 @@ import (
 )
 
 func main() {
-	template, err := os.ReadFile("template.html")
-	if err != nil {
-		fmt.Println(err)
-	} else if len(os.Args) > 1 {
+	if len(os.Args) > 1 {
 		path, _ := filepath.Abs(os.Args[1])
 		wholeFile, err := os.ReadFile(path)
 		if err != nil {
 			fmt.Println(err)
 		} else {
-			parser.Rend(parser.ParseWhole(string(template), strings.Split(string(wholeFile), "\n")))
+			parser.Rend(parser.ParseWhole(strings.Split(string(wholeFile), "\n")))
 		}
 	} else {
 		var input string = ""
 		var whole []string
-		for input != "\\quit" && input != "\\rend" {
-			fmt.Print("> ")
-			fmt.Scanln(&input)
+		reader := bufio.NewReader(os.Stdin)
+		for input != "\\quit\r" && input != "\\rend\r" {
+			fmt.Print(len(whole)+1, "> ")
+			input, _ = reader.ReadString('\n')
+			input = input[:len(input)-1]
 			whole = append(whole, input)
+			if input == "\\quit" && input == "\\rend" {
+				break
+			}
 		}
-		if input == "\\rend" {
-			parser.Rend(parser.ParseWhole(string(template), whole))
+		if input == "\\rend" || /* For Windows */ input == "\\rend\r" {
+			whole = whole[:len(whole)-1]
+			parser.Rend(parser.ParseWhole(whole))
 		}
 	}
 	a := ""

@@ -60,7 +60,9 @@ func NewAlpha(str string, next Element) Alpha {
 
 func (alpha Alpha) Rend() {
 	Write(alpha.value)
-	alpha.next.Rend()
+	if alpha.next != nil {
+		alpha.next.Rend()
+	}
 }
 
 func (num Num) Rend() {

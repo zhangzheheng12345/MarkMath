@@ -6,11 +6,69 @@ import (
 	"github.com/zhangzheheng12345/MarkMath/parser/elements"
 )
 
+const template = `<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            div {
+                display:flex;
+                align-items:center;
+                padding-left:1px;
+                padding-right:1px;
+            }
+            div.fraction {
+                flex-direction:column;
+            }
+            div.fractionLine {
+                width:100%;
+                height:1px;
+                background-color:black;
+            }
+            div .root {
+                display:flex;
+                align-items:center;
+                margin-left:1px;
+                margin-right:1px;
+            }
+            div .rootFront {
+                flex-direction:column;
+                align-items:flex-end;
+                justify-content:flex-end;
+                padding:0px;
+                border-right:0px;
+            }
+            div .rootMid {
+                background-color:black;
+                width:2px;
+                height:100%;
+            }
+            div .rootLine {
+                background-color:black;
+                width:100%;
+                height:1px;
+            }
+            div .rootBack {
+                flex-direction:column;
+                align-items:flex-end;
+                padding:0px;
+                border-left:0px;
+            }
+            body {
+                padding:15px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- MarkMath Mark : ten ' # ' are where will be filled. -->
+        ##########
+    </body>
+</html>`
+
 func Rend(e elements.Element) {
 	e.Rend()
 }
 
-func ParseWhole(template string, strs []string) elements.Element {
+func ParseWhole(strs []string) elements.Element {
 	var result []elements.Element
 	for _, str := range strs {
 		result = append(result, ParseLine(strings.Split(str, "")))
@@ -52,17 +110,13 @@ func IsSingleNum(str string) bool {
 	return len(str) == 1 && []byte(str)[0] >= 48 && []byte(str)[0] <= 57
 }
 
-func IsSingleAlpha(str string) bool {
-	return len(str) == 1 && []byte(str)[0] >= 65 && []byte(str)[0] <= 122
-}
-
 func ParseMath(str []string, index int) elements.Element {
 	if index < len(str) {
 		if str[index] == "+" {
 			if index+1 < len(str) && str[index+1] == "-" {
 				return elements.NewPlusMinus(ParseMath(str, index+2))
 			} else {
-				return elements.NewPlus(ParseMath(str, index+2))
+				return elements.NewPlus(ParseMath(str, index+1))
 			}
 		} else if str[index] == "-" {
 			return elements.NewMinus(ParseMath(str, index+1))
@@ -140,12 +194,10 @@ func ParseMath(str []string, index int) elements.Element {
 			return elements.NewBackBrace(ParseMath(str, index+1))
 		} else if IsSingleNum(str[index]) {
 			endIndex := index
-			for str[endIndex] == "." || (endIndex < len(str) && IsSingleNum(str[endIndex])) {
+			for endIndex < len(str) && (IsSingleNum(str[endIndex]) || str[endIndex] == ".") {
 				endIndex++
 			}
 			return elements.NewNum(strings.Join(str[index:endIndex], ""), ParseMath(str, endIndex))
-		} else if IsSingleAlpha(str[index]) {
-			return elements.NewAlpha(str[index], ParseMath(str, index+1))
 		} else if str[index] == ";" {
 			index++
 			if index < len(str) {
@@ -196,7 +248,7 @@ func ParseMath(str []string, index int) elements.Element {
 			point := ParseMath(result, 0)
 			return elements.NewSubscript(point, ParseMath(str, index+1))
 		} else {
-			return ParseMath(str, index+1)
+			return elements.NewAlpha(str[index], ParseMath(str, index+1))
 		}
 	}
 	return nil
