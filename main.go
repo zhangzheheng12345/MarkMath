@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"parser"
+	"github.com/zhangzheheng12345/MarkMath/parser"
 )
 
 func main() {

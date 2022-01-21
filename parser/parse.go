@@ -3,7 +3,7 @@ package parser
 import (
 	"strings"
 
-	"parser/elements"
+	"github.com/zhangzheheng12345/MarkMath/parser/elements"
 )
 
 func Rend(e elements.Element) {
