@@ -15,6 +15,7 @@ const template = `<!DOCTYPE html>
                 align-items:center;
                 padding-left:1px;
                 padding-right:1px;
+                font-family:math;
             }
             div.fraction {
                 flex-direction:column;
